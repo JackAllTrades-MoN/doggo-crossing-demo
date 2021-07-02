@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, target-densitydpi=device-dpi">
+    <title>Dog Crossing</title>
+    <style>
+      #canvas {
+        background: #666;
+        outline: black 2px solid;
+      }
+      @media screen and (max-width: 640px) {
+        .canvas-parent {
+          width: 100%;
+          height: 50vh;
+        }
+      }
+      @media screen and (min-width: 640px) {
+        .canvas-parent {
+          width: 640px;
+          height: 480px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="canvas-parent" id="canvasParent">
+      <canvas id="canvas"
+      width="640"
+      height="480"
+      focusable="True"
+      tabindex=1></canvas>
+    </div>
+    <h5>Dog Crossing</h5>
+    <p id="howtoplay">
+      What should I do?:<br>
+      It's simple! Just keep avoiding cars to save them.<br>
+      For <b>smart phone</b>: <b>tap the screen</b> to accelerate the dog<br>
+      For <b>computers</b>: press <b>spacebar</b> to do so
+    </p>
+    <script src="index.js"></script>
+    <script>
+      const FRAMERATE = 60;
+      let canvasParent = document.getElementById("canvasParent");
+      let canvas = document.getElementById("canvas");
+
+      let resize = () => {
+        canvas.width = canvasParent.clientWidth;
+        canvas.height = canvasParent.clientHeight;
+      };
+
+      let draw = () => {
+        let context = canvas.getContext("2d");
+        context.fillRect(100, 100, 80, 80);
+      };
+
+      let world = () => {
+        resize();
+        draw();
+      };
+
+      setInterval(() => world(), 1000/FRAMERATE);
+
+      document.body.addEventListener('touchmove', function(event) {
+        event.preventDefault();
+      }, false); 
+    </script>
+  </body>
+</html>
